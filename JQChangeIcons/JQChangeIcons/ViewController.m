@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <objc/runtime.h>
 
 @interface ViewController ()
 
@@ -17,13 +18,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-}
-- (IBAction)changeAppIconAction:(UIButton *)sender
-{
-    [self changeAppIcon];
+    [self runtimeReplaceAlert];
 }
 
-- (void)changeAppIcon
+// 利用runtime来替换展现弹出框的方法
+- (void)runtimeReplaceAlert
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Method presentM = class_getInstanceMethod(self.class, @selector(presentViewController:animated:completion:));
+        Method presentSwizzlingM = class_getInstanceMethod(self.class, @selector(ox_presentViewController:animated:completion:));
+        // 交换方法实现
+        method_exchangeImplementations(presentM, presentSwizzlingM);
+    });
+}
+
+// 自己的替换展示弹出框的方法
+- (void)ox_presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
+    
+    if ([viewControllerToPresent isKindOfClass:[UIAlertController class]]) {
+        NSLog(@"title : %@",((UIAlertController *)viewControllerToPresent).title);
+        NSLog(@"message : %@",((UIAlertController *)viewControllerToPresent).message);
+        
+        // 换图标时的提示框的title和message都是nil，由此可特殊处理
+        UIAlertController *alertController = (UIAlertController *)viewControllerToPresent;
+        if (alertController.title == nil && alertController.message == nil) { // 是换图标的提示
+            return;
+        } else {// 其他提示还是正常处理
+            [self ox_presentViewController:viewControllerToPresent animated:flag completion:completion];
+            return;
+        }
+    }
+    
+    [self ox_presentViewController:viewControllerToPresent animated:flag completion:completion];
+}
+
+- (IBAction)changeAppIconAction:(UIButton *)sender
 {
     if ([UIApplication sharedApplication].supportsAlternateIcons) {
         NSLog(@"you can change this app's icon");
@@ -52,7 +82,6 @@
         }];
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
