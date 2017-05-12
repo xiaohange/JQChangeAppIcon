@@ -108,7 +108,7 @@
 
 ```
 ### 优化后的效果如下：
-![](http://img.blog.csdn.net/20170512104703077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzE4MTAzNTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![](https://github.com/xiaohange/JQChangeAppIcon/blob/master/demo.gif?raw=true)
 
 ## Other
 [JQTumblrHud-高仿Tumblr App 加载指示器hud](https://github.com/xiaohange/JQTumblrHud)
