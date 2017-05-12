@@ -2,8 +2,8 @@
 [ iOS中 iOS10.3如何更换 app 图标 (教程)](http://blog.csdn.net/qq_31810357/article/details/68489138
 )
 
-###iOS中 iOS10.3如何更换 app 图标  利用runtime后台切换icon
-####效果如下：
+### iOS中 iOS10.3如何更换 app 图标  利用runtime后台切换icon
+#### 效果如下：
 ![](http://img.blog.csdn.net/20170330162610437)
 
 ```
@@ -31,7 +31,7 @@
     </dict> 
 ```
 
-####替换图标部分的代码：
+#### 替换图标部分的代码：
 ```
 - (void)changeAppIcon
 {
@@ -63,9 +63,9 @@
     }
 }
 ```
-###遇到一个问题：必须弹框吗？
+### 遇到一个问题：必须弹框吗？
 #### A：NO！
-####优化：利用runtime后台切换icon
+#### 优化：利用runtime后台切换icon
 ```
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -106,7 +106,7 @@
 }
 
 ```
-###优化后的效果如下：
+### 优化后的效果如下：
 ![](http://img.blog.csdn.net/20170512104703077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzE4MTAzNTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 ## Other
