@@ -6,6 +6,7 @@
 #### 效果如下：
 ![](http://img.blog.csdn.net/20170330162610437)
 
+#### info.plist 如何填写呢？一时可能搞不清楚如何操作，下面做个实例:
 ```
 <key>CFBundleIcons</key>
     <dict>
